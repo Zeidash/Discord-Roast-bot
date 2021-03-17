@@ -1,17 +1,23 @@
 import discord
 from discord.ext import commands
 import random
+from datetime import datetime
 
 intents = discord.Intents(messages = True, guilds = True, reactions = True, members = True, presences = True)
-client = commands.Bot(command_prefix = '-', intents = intents, help_command=None)
+client = commands.Bot(command_prefix = '.', intents = intents, help_command=None)
 
 roasty = ('Jsi malá ubrečená píča, debile', 'Proč ztrácíš můj čas, plebe?', 'Nestojíš ani za roast.','Ty jsi tak těžký že ani pružinky z Lipra tě nezvednou (Generální partneři roastu jsou: Liper.)','Slabý kus')
 forcePasty = ('Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. **Ironic.** He could save others from death, but not himself.' , 'The dark side of the Force is a pathway to many abilities some consider to be unnatural.', 'You wanna buy some deathsticks?')
 
+championsNames = ["Aatrox","Ahri","Akali","Alistar","Amumu","Anivia","Annie","Aphelios","Ashe","Aurelion Sol","Azir","Bard","Blitzcrank","Brand","Braum","Caitlyn","Camille","Cassiopeia","Cho'Gath","Corki","Darius","Diana","Dr. Mundo","Draven","Ekko","Elise","Evelynn","Ezreal","Fiddlesticks","Fiora","Fizz","Galio","Gangplank","Garen","Gnar","Gragas","Graves","Hecarim","Heimerdinger","Illaoi","Irelia","Ivern","Janna","Jarvan IV","Jax","Jayce","Jhin","Jinx","Kai'Sa","Kalista","Karma","Karthus","Kassadin","Katarina","Kayle","Kayn","Kennen","Kha'Zix","Kindred","Kled","Kog'Maw","LeBlanc","Lee Sin","Leona","Lillia","Lissandra","Lucian","Lulu","Lux","Malphite","Malzahar","Maokai","Master Yi","Miss Fortune","Mordekaiser","Morgana","Nami","Nasus","Nautilus","Neeko","Nidalee","Nocturne","Nunu and Willump","Olaf","Orianna","Ornn","Pantheon","Poppy","Pyke","Qiyana","Quinn","Rakan","Rammus","Rek'Sai","Rell","Renekton","Rengar","Riven","Rumble","Ryze","Samira","Sejuani","Senna","Seraphine","Sett","Shaco","Shen","Shyvana","Singed","Sion","Sivir","Skarner","Sona","Soraka","Swain","Sylas","Syndra","Tahm Kench","Taliyah","Talon","Taric","Teemo","Thresh","Tristana","Trundle","Tryndamere","Twisted Fate","Twitch","Udyr","Urgot","Varus","Vayne","Veigar","Vel'Koz","Vi","Viktor","Vladimir","Viego","Volibear","Warwick","Wukong","Xayah","Xerath","Xin Zhao","Yasuo","Yone","Yorick","Yuumi","Zac","Zed","Ziggs","Zilean","Zoe","Zyra"]
+championCosts = ["4800","4800","3150","1350","450","3150","450","6300","450","6300","4800","6300","3150","4800","4800","4800","6300","4800","1350","3150","4800","4800","450","4800","6300","4800","1350","3150","1350","4800","4800","3150","3150","450","4800","3150","4800","4800","3150","6300","4800","6300","1350","4800","1350","4800","6300","4800","6300","4800","3150","3150","3150","3150","450","6300","4800","4800","6300","6300","4800","3150","4800","4800","6300","4800","4800","4800","3150","1350","4800","4800","450","3150","1350","1350","4800","1350","4800","6300","3150","4800","450","3150","4800","6300","3150","450","6300","6300","4800","6300","1350","6300","6300","4800","4800","4800","4800","450","6300","4800","6300","6300","6300","3150","3150","3150","450","1350","450","4800","3150","450","4800","6300","4800","6300","6300","4800","1350","1350","4800","1350","3150","1350","1350","3150","1350","3150","4800","4800","1350","4800","4800","6300","4800","3150","3150","450","4800","6300","4800","1350","4800","6300","4800","6300","4800","4800","4800","1350","6300","4800"]
+
+naive_utc_dt = datetime.utcnow()
+
 @client.event
 async def on_ready():
     print('Bot is ready baby oh yes!')
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="Eternal suffering and chronic depressoin -help"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name="Eternal suffering and chronic depressoin .help"))
 #@client.event
 #async def on_member_join(member):
 #    print(f"Gods of the afterlife, spare my arse, to which curse do I owe {member}'s presence?.")
@@ -38,7 +44,7 @@ async def vasek(ctx):
 
 @client.command()
 async def help(ctx):
-    await ctx.send('```list všech příkazů \n -roast | Dostaneš náhodný roast.    \n -vasek | Já fakt nevim proč jsem to přidal. \n -playlist | Pošle link na award winning playlist. \n -force | Pošle náhodnou Star Wars pastu. \n -pp | Zjisti jak obdařen jsi. \n -doinb | DoinB copypasta z 2019 \n https://twitter.com/selfmade_LoL/status/1288949960298450944?s=20```')
+    await ctx.send('```list všech příkazů \n .roast | Dostaneš náhodný roast.    \n .vasek | Já fakt nevim proč jsem to přidal. \n .playlist | Pošle link na award winning playlist. \n .force | Pošle náhodnou Star Wars pastu. \n .pp | Zjisti jak obdařen jsi. \n .doinb | DoinB copypasta z 2019 \n https://twitter.com/selfmade_LoL/status/1288949960298450944?s=20 \n .cas | Zobrazí čas u rudých sviní. \n .champ jmenoChampa | Napíše ti kolik stojí champ```')
 
 @client.command()
 async def playlist(ctx):
@@ -65,5 +71,25 @@ async def pp(ctx):
 @client.command()
 async def doinb(ctx):
     await ctx.send('DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN')
+
+@client.command()
+async def cas(ctx):
+    hours = naive_utc_dt.hour + 8
+    minutes = naive_utc_dt.minute
+    cas = 'Na Náměstí Nebeského klidu je nyní ' + str(hours) + ':' + str(minutes)
+    await ctx.send(cas)
+
+@client.command()
+async def champ(ctx, arg):
+    if arg == '':
+        await ctx.send('Zkus to znovu (.champ jmenoChampa)')
+    else:
+        arg = arg.lower()
+        arg = arg.capitalize()
+        print(arg)
+        if arg in championsNames:
+            await ctx.send('Champion ' + arg + ' stojí ' + str(championCosts[championsNames.index(arg)]) + ' BE')
+        else:
+            await ctx.send('Buď je dev debil a má špatně databási champů, nebo neumíš psát, vyber si.')
 
 client.run('ODIxNTIxMDIwMDM5OTg3MjMw.YFE7Eg.x06i_mWtMwMNJAnZ3FVJ2HcqCuU')
