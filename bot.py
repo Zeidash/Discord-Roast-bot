@@ -27,10 +27,15 @@ async def on_ready():
 #    print(f"{member} odešel, good riddance.")   
 
 @client.command()
-async def roast(ctx):
-    i = random.randint(0, 4)
-    roast = roasty[i]
-    await ctx.send(roast)
+async def roast(ctx, user: discord.Member):
+    if user == '':
+        i = random.randint(0, 4)
+        roast = roasty[i]
+        await ctx.send(roast)
+    else:
+        i = random.randint(0, 4)
+        roast = roasty[i]
+        await ctx.send(roast + user.mention)
 
 @client.command()
 async def force(ctx):
@@ -39,20 +44,22 @@ async def force(ctx):
     await ctx.send(pasta)
 
 @client.command()
-async def vasek(ctx):
-    await ctx.send('Ostříhej se :).')
+async def vasek(ctx, user: discord.Member):
+    if user == '':
+        await ctx.send('Ostříhej se :)')
+    else:
+        await ctx.send('Ostříhej se :)' + user.mention)
 
 @client.command()
 async def help(ctx):
-    await ctx.send('```list všech příkazů \n .roast | Dostaneš náhodný roast.    \n .vasek | Já fakt nevim proč jsem to přidal. \n .playlist | Pošle link na award winning playlist. \n .force | Pošle náhodnou Star Wars pastu. \n .pp | Zjisti jak obdařen jsi. \n .doinb | DoinB copypasta z 2019 \n https://twitter.com/selfmade_LoL/status/1288949960298450944?s=20 \n .cas | Zobrazí čas u rudých sviní. \n .champ jmenoChampa | Napíše ti kolik stojí champ```')
+    await ctx.send('```list všech příkazů \n .roast jméno(volitelné) | Dostaneš náhodný roast.    \n .vasek jmeno(volitelné) | Já fakt nevim proč jsem to přidal. \n .playlist | Pošle link na award winning playlist. \n .force | Pošle náhodnou Star Wars pastu. \n .pp jméno(volitelné) | Zjisti jak obdařen jsi ty, nebo někdo jiný. \n .doinb | DoinB copypasta z 2019 \n https://twitter.com/selfmade_LoL/status/1288949960298450944?s=20 \n .cas | Zobrazí čas u rudých sviní. \n .champ jmenoChampa | Napíše ti kolik stojí champ \n .had | Odhalí hada \n .amogus | Bacha na impostory *vtipné*```')
 
 @client.command()
 async def playlist(ctx):
     await ctx.send('https://youtu.be/9GUQUgmt1zg')
 
 @client.command()
-async def pp(ctx):
-    komentar = '';
+async def pp(ctx, user: discord.Member):
     i = random.randint(10, 250)
     i = i/10
     if i < 5:
@@ -66,8 +73,10 @@ async def pp(ctx):
     elif i <= 25:
         komentar = 'Měl bys nosit jen dlouhé kalhoty - '
     komentar += str(i) + ' cm'
-    await ctx.send(komentar)
-
+    if user == '':
+        await ctx.send(komentar)
+    else:
+        await ctx.send(komentar + user.mention)
 @client.command()
 async def doinb(ctx):
     await ctx.send('DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN DOINB RYZE HACK？英雄联盟 400 CS 24 MIN')
@@ -91,5 +100,15 @@ async def champ(ctx, arg):
             await ctx.send('Champion ' + arg + ' stojí ' + str(championCosts[championsNames.index(arg)]) + ' BE')
         else:
             await ctx.send('Buď je dev debil a má špatně databási champů, nebo neumíš psát, vyber si.')
+
+@client.command(pass_context = True)
+async def amogus(ctx):
+    await ctx.send('LMAO TY JSI IMPOSTOR :joy:' + ctx.message.author.mention)
+
+@client.command()
+async def had(ctx):
+    sam = '<@401475658800300062>'
+    await ctx.send(sam)
+
 
 client.run('ODIxNTIxMDIwMDM5OTg3MjMw.YFE7Eg.x06i_mWtMwMNJAnZ3FVJ2HcqCuU')
