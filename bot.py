@@ -111,4 +111,4 @@ async def had(ctx):
     await ctx.send(sam)
 
 
-client.run('ODIxNTIxMDIwMDM5OTg3MjMw.YFE7Eg.x06i_mWtMwMNJAnZ3FVJ2HcqCuU')
+client.run('')
